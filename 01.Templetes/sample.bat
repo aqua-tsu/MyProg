@@ -1,9 +1,9 @@
 @ECHO OFF
 :: +--------------------------------------------------
-:: | Create/Author  | 2023.03.26 / Yusuke 
+:: | Create/Author  | 2023.03.26 / aqua 
 :: | Update/Author  | 20yy.yy.yy / Name
 :: | Version        | 1.0
-:: | Overview       | 
+:: | Overview       | Export Windows Events(app,sys,sec)
 :: +--------------------------------------------------
 
 :: Environment
@@ -17,31 +17,28 @@ SET LOGPATH=%LOGFOLDER%%LOGFILENAME%
 :: CurrentDir
 PUSHD %~DP0
 
+:: --------------------------------------------------
 :: MainMethod
 :Main
   CALL :Init
 
-:: MainWork
-
-
-:: TerminateWork
+  :: TerminateWork
   GOTO :Terminate
 
-
+:: --------------------------------------------------
 :: Initial
 :Init
-  IF EXIST "%LOGFOLDER%" (
-  ) ELSE (
+  IF NOT EXIST "%LOGFOLDER%" (
     MKDIR %LOGFOLDER%
   )
-  EXIT /b
 
+:: --------------------------------------------------
 :: SubMethod
 :Sub
 
+:: --------------------------------------------------
 :: Terminate
 :Terminate
   POPD
   ENDLOCAL
-  pause
   EXIT /b

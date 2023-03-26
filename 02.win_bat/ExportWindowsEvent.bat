@@ -17,30 +17,37 @@ SET LOGPATH=%LOGFOLDER%%LOGFILENAME%
 :: CurrentDir
 PUSHD %~DP0
 
+:: --------------------------------------------------
 :: MainMethod
 :Main
   CALL :Init
 
-:: MainWork
+  :: 今あるものを削除
+  DEL /Q %LOGFOLDER%
+
+  :: WindowsEvent出力
   wevtutil epl application %LOGFOLDER%%COMPUTERNAME%_app_%NOWDATE%.evtx
   wevtutil epl system      %LOGFOLDER%%COMPUTERNAME%_sys_%NOWDATE%.evtx
   wevtutil epl Security    %LOGFOLDER%%COMPUTERNAME%_sec_%NOWDATE%.evtx
 
-:: TerminateWork
+  :: TerminateWork
   GOTO :Terminate
 
+
+:: --------------------------------------------------
 :: Initial
 :Init
   IF NOT EXIST "%LOGFOLDER%" (
     MKDIR %LOGFOLDER%
   )
 
+:: --------------------------------------------------
 :: SubMethod
 :Sub
 
+:: --------------------------------------------------
 :: Terminate
 :Terminate
   POPD
   ENDLOCAL
   EXIT /b
-
