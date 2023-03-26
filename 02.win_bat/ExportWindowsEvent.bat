@@ -1,9 +1,9 @@
 @ECHO OFF
 :: +--------------------------------------------------
-:: | Create/Author  | 2023.03.26 / Yusuke 
+:: | Create/Author  | 2023.03.26 / aqua 
 :: | Update/Author  | 20yy.yy.yy / Name
 :: | Version        | 1.0
-:: | Overview       | 
+:: | Overview       | Export Windows Events(app,sys,sec)
 :: +--------------------------------------------------
 
 :: Environment
@@ -22,19 +22,18 @@ PUSHD %~DP0
   CALL :Init
 
 :: MainWork
-
+  wevtutil epl application %LOGFOLDER%%COMPUTERNAME%_app_%NOWDATE%.evtx
+  wevtutil epl system      %LOGFOLDER%%COMPUTERNAME%_sys_%NOWDATE%.evtx
+  wevtutil epl Security    %LOGFOLDER%%COMPUTERNAME%_sec_%NOWDATE%.evtx
 
 :: TerminateWork
   GOTO :Terminate
 
-
 :: Initial
 :Init
-  IF EXIST "%LOGFOLDER%" (
-  ) ELSE (
+  IF NOT EXIST "%LOGFOLDER%" (
     MKDIR %LOGFOLDER%
   )
-  EXIT /b
 
 :: SubMethod
 :Sub
@@ -43,5 +42,5 @@ PUSHD %~DP0
 :Terminate
   POPD
   ENDLOCAL
-  pause
   EXIT /b
+
