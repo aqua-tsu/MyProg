@@ -1,6 +1,6 @@
 @ECHO OFF
 :: +--------------------------------------------------
-:: | Create/Author  | 2023.03.26 / aqua 
+:: | Create/Author  | 2023.03.26 / tak0 
 :: | Update/Author  | 20yy.yy.yy / Name
 :: | Version        | 1.0
 :: | Overview       | Export Windows Events(app,sys,sec)
